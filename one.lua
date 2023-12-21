@@ -1,6 +1,7 @@
 _G.remove = true
+_G.fuckyou = true
 spawn(function()
-  while true do
+  while _G.fuckyou do
     if not task.wait(0.5) or not _G.remove then
       break
     end
