@@ -4,7 +4,7 @@ _G.stop = false
 
 spawn(function()
   while _G.stop do
-  return
+  task.wait(100000000)
   end
 
   while _G.fuckyou do
