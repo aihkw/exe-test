@@ -1,14 +1,14 @@
 getgenv().remove = true
-getgenv().fuckyou = true
+getgenv().bro = true
 getgenv().stop = false
 
 spawn(function()
-  while stop do
+  while getgenv().stop do
   task.wait(100000000)
   end
 
-  while fuckyou do
-    if not task.wait(0.5) or not remove then
+  while getgenv().bro do
+    if not task.wait(0.5) or not getgenv().remove then
       break
     end
     if not (game.CoreGui.PurchasePrompt.ProductPurchaseContainer.Animator:FindFirstChild("Prompt") and game.CoreGui.PurchasePrompt.ProductPurchaseContainer.Animator.Prompt:FindFirstChild("AlertContents") and game.CoreGui.PurchasePrompt.ProductPurchaseContainer.Animator.Prompt.AlertContents:FindFirstChild("Footer")) or not game.CoreGui.PurchasePrompt.ProductPurchaseContainer.Animator.Prompt.AlertContents.Footer:FindFirstChild("Buttons") then
