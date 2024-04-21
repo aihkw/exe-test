@@ -2,9 +2,6 @@
 -- now you may ask: why in god's name is the code making me want to pull my eyes out? dont ask why... all it matters is it works!
 -- made cuz bored
 
-
-
-
 print("\n")
 
 print("Executor Vulnerability Check - Executor: " .. tostring(identifyexecutor()) .. "\nInspired by the UNC Environment Check!\n")
@@ -81,6 +78,18 @@ else
 pass += 1
 print("  ✅ RequestAsync")
 insert(' game:GetService("HttpRbxApiService"):RequestAsync()')
+end
+end)
+task.wait()
+print("ScriptContext - One function in this service creates a CoreScript to the desired location. This has been used in bypassing executor's security especially the approach that James Napora took in his GitHub gist, parenting a CoreScript to an actor to run malicious code.")
+task.spawn(function()
+local s, e = pcall(function() game:GetService("ScriptContext"):AddCoreScriptLocal() end)
+if e == "Argument 1 missing or nil" then
+fail += 1
+warn("  ⛔ AddCoreScriptLocal")
+else
+pass += 1
+print("  ✅ AddCoreScriptLocal")
 end
 end)
 task.wait()
@@ -661,7 +670,7 @@ getrenv().loadstring = getgenv().loadstring
 getrenv().getgenv = getgenv().getgenv
 getrenv()._set = clonefunction(setthreadidentity)
 local old old = hookmetamethod(game, "__index", function(a, b) task.spawn(function() _set(7) task.wait(0.1)
-getgenv().s1, getgenv().e1 = pcall(function() loadstring(tostring(FUNCTION_TO_CALL))() end)
+getgenv().s1, e1 = pcall(function() loadstring(tostring(FUNCTION_TO_CALL))() end)
 end) hookmetamethod(game, "__index", old) return old(a, b) end)
 end)
 task.wait(0.1)
@@ -675,7 +684,11 @@ print("  ⏺️ Escaping Executor's Environment & Running as LocalScript - Somet
 end
 end
 end)
-task.wait(1)
+print("  ⏺️ (No Test) Using hookmetamethod to stop metamethod hooks - There was a case like in Electron V3 where the executor's security was just quite literally hookmetamethod. You used to be able to use hookmetamethod to unhook blocked functions and bypass the security.")
+task.wait(2.5)
+
+
+
 
 local rate = math.round(pass / (pass + fail + unknown) * 100)
 local outOf = pass .. " out of " .. (pass + fail + unknown)
@@ -683,3 +696,4 @@ print("\n")
 print("Vulnerability Check Summary - " .. tostring(identifyexecutor()))
 print("✅ Tested with a " .. rate .. "% vulnerability mitigations rate (" .. outOf .. ")")
 print("⛔ " .. fail .. " vulnerabilities not mitigated")
+print("⏺️ " .. unknown .. " vulnerabilities not tested")
