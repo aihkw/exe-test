@@ -661,7 +661,7 @@ getrenv().loadstring = getgenv().loadstring
 getrenv().getgenv = getgenv().getgenv
 getrenv()._set = clonefunction(setthreadidentity)
 local old old = hookmetamethod(game, "__index", function(a, b) task.spawn(function() _set(7) task.wait(0.1)
-getgenv().s1, e1 = pcall(function() loadstring(tostring(FUNCTION_TO_CALL))() end)
+getgenv().s1, getgenv().e1 = pcall(function() loadstring(tostring(FUNCTION_TO_CALL))() end)
 end) hookmetamethod(game, "__index", old) return old(a, b) end)
 end)
 task.wait(0.1)
