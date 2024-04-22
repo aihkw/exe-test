@@ -655,6 +655,8 @@ end
 end)
 repeat task.wait() until GAME_HTTPPOST_FINISHED
 task.wait(1)
+task.wait(1.5)
+task.wait()
 print("Blocked Function Protection Bypass - Moving onto vulnerabilities that let bad actors bypass the security of your executor.")
 task.spawn(function()
 for i, v in pairs(BLOCKED_FUNCTION:GetMetadata()) do
